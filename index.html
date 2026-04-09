@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hyperproof – Settings › People</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 14px;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ── TOP NAV ─────────────────────────────────── */
+    .topnav {
+      display: flex;
+      align-items: center;
+      height: 52px;
+      background: #fff;
+      border-bottom: 1px solid #e0e2e7;
+      padding: 0 16px;
+      gap: 12px;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+    .topnav-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      background: #5b3fc8;
+      border-radius: 50%;
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .topnav-logo svg { width: 20px; height: 20px; fill: #fff; }
+    .topnav-spacer { flex: 1; }
+    .topnav-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #555;
+      font-size: 13px;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    .topnav-btn:hover { background: #f0f2f5; }
+    .topnav-btn svg { width: 16px; height: 16px; }
+    .topnav-org {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #333;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .topnav-org:hover { background: #f0f2f5; }
+    .topnav-org svg { width: 18px; height: 18px; color: #777; }
+    .topnav-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #c0392b;
+      color: #fff;
+      font-weight: 600;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* ── BODY WRAPPER ────────────────────────────── */
+    .body-wrap {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── PRIMARY SIDEBAR ─────────────────────────── */
+    .primary-sidebar {
+      width: 56px;
+      background: #1c1c2e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 0;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+    .ps-collapse {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 6px;
+      color: #9999b5;
+    }
+    .ps-collapse:hover { background: rgba(255,255,255,0.08); }
+    .ps-collapse svg { width: 16px; height: 16px; }
+    .ps-item {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #9999b5;
+      position: relative;
+    }
+    .ps-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .ps-item.active { background: rgba(91,63,200,0.35); color: #a78bfa; }
+    .ps-item svg { width: 18px; height: 18px; }
+    .ps-spacer { flex: 1; }
+    .ps-settings {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #9999b5;
+    }
+    .ps-settings:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .ps-settings.active { background: rgba(91,63,200,0.35); color: #a78bfa; }
+    .ps-settings svg { width: 18px; height: 18px; }
+
+    /* ── SETTINGS SIDEBAR ────────────────────────── */
+    .settings-sidebar {
+      width: 200px;
+      background: #fff;
+      border-right: 1px solid #e0e2e7;
+      padding: 20px 0;
+      flex-shrink: 0;
+      overflow-y: auto;
+    }
+    .ss-item {
+      display: block;
+      padding: 9px 20px;
+      font-size: 13.5px;
+      color: #444;
+      cursor: pointer;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: background 0.12s;
+    }
+    .ss-item:hover { background: #f5f5fb; color: #5b3fc8; }
+    .ss-item.active {
+      background: #f0ecff;
+      color: #5b3fc8;
+      border-left-color: #5b3fc8;
+      font-weight: 600;
+    }
+
+    /* ── MAIN CONTENT ────────────────────────────── */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px 32px;
+      background: #f0f2f5;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .page-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .page-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .icon-btn {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #666;
+    }
+    .icon-btn:hover { background: #f5f5fb; }
+    .icon-btn svg { width: 16px; height: 16px; }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid #e0e2e7;
+      margin-bottom: 20px;
+    }
+    .tab {
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      text-decoration: none;
+    }
+    .tab:hover { color: #5b3fc8; }
+    .tab.active { color: #5b3fc8; border-bottom-color: #5b3fc8; font-weight: 600; }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .btn-new {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border: 1.5px solid #5b3fc8;
+      border-radius: 6px;
+      background: #fff;
+      color: #5b3fc8;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-new:hover { background: #f0ecff; }
+    .btn-new svg { width: 14px; height: 14px; }
+    .btn-import {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 6px;
+      background: #fff;
+      color: #444;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .btn-import:hover { background: #f5f5fb; }
+    .btn-import svg { width: 14px; height: 14px; }
+    .toolbar-spacer { flex: 1; }
+    .filter-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border: 1.5px solid #5b3fc8;
+      border-radius: 20px;
+      background: #f0ecff;
+      color: #5b3fc8;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .filter-chip svg { width: 13px; height: 13px; }
+    .filter-chip-x {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #5b3fc8;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .filter-chip-x:hover { background: rgba(91,63,200,0.15); }
+
+    /* Table */
+    .table-wrap {
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #e0e2e7;
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead tr {
+      background: #f8f9fb;
+      border-bottom: 1px solid #e0e2e7;
+    }
+    thead th {
+      text-align: left;
+      padding: 11px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #666;
+      white-space: nowrap;
+      user-select: none;
+    }
+    thead th.sortable { cursor: pointer; }
+    thead th.sortable:hover { color: #5b3fc8; }
+    thead th svg { width: 12px; height: 12px; vertical-align: middle; margin-left: 3px; }
+    .th-check { width: 44px; text-align: center; }
+    tbody tr {
+      border-bottom: 1px solid #f0f2f5;
+      transition: background 0.1s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #fafbff; }
+    tbody td {
+      padding: 11px 14px;
+      font-size: 13.5px;
+      color: #2d2d44;
+      vertical-align: middle;
+    }
+    .td-check { text-align: center; width: 44px; }
+    input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+      accent-color: #5b3fc8;
+    }
+
+    /* Avatar */
+    .user-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .user-name { font-weight: 500; color: #1a1a2e; }
+
+    /* Email */
+    .email-link { color: #5b3fc8; text-decoration: none; }
+    .email-link:hover { text-decoration: underline; }
+
+    /* Status badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: default;
+    }
+    .badge-active { background: #e6f9f0; color: #1a9e5b; border: 1px solid #b7edcf; }
+    .badge-inactive { background: #f5f5f5; color: #888; border: 1px solid #ddd; }
+
+    /* Deactivate link */
+    .deactivate-link {
+      color: #5b3fc8;
+      text-decoration: none;
+      font-size: 13.5px;
+    }
+    .deactivate-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="topnav-logo">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+    </svg>
+  </div>
+
+  <div class="topnav-spacer"></div>
+
+  <button class="topnav-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
+    </svg>
+    Help
+  </button>
+
+  <div class="topnav-org">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+      <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+    </svg>
+    PM testing org – Hscopes
+  </div>
+
+  <div class="topnav-avatar">SD</div>
+</nav>
+
+<div class="body-wrap">
+
+  <!-- PRIMARY SIDEBAR -->
+  <aside class="primary-sidebar">
+    <div class="ps-collapse">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </div>
+
+    <!-- Overview -->
+    <div class="ps-item" title="Overview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+        <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+      </svg>
+    </div>
+    <!-- Work Items -->
+    <div class="ps-item" title="Work Items">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+      </svg>
+    </div>
+    <!-- Programs -->
+    <div class="ps-item" title="Programs">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 7h18M3 12h18M3 17h18"/>
+      </svg>
+    </div>
+    <!-- Controls -->
+    <div class="ps-item" title="Controls">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+    </div>
+    <!-- Labels -->
+    <div class="ps-item" title="Labels">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/>
+        <circle cx="7" cy="7" r="1.5"/>
+      </svg>
+    </div>
+    <!-- Proof -->
+    <div class="ps-item" title="Proof">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+      </svg>
+    </div>
+    <!-- Policies -->
+    <div class="ps-item" title="Policies">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+      </svg>
+    </div>
+    <!-- Audits -->
+    <div class="ps-item" title="Audits">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+      </svg>
+    </div>
+    <!-- Assessments -->
+    <div class="ps-item" title="Assessments">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2M9 12l2 2 4-4"/>
+      </svg>
+    </div>
+    <!-- Risk -->
+    <div class="ps-item" title="Risk">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+        <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+    </div>
+
+    <div class="ps-spacer"></div>
+
+    <!-- Settings (active) -->
+    <div class="ps-settings active" title="Settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+      </svg>
+    </div>
+  </aside>
+
+  <!-- SETTINGS SIDEBAR -->
+  <aside class="settings-sidebar">
+    <a class="ss-item" href="#">General</a>
+    <a class="ss-item active" href="#">People</a>
+    <a class="ss-item" href="#">Scopes</a>
+    <a class="ss-item" href="#">Notifications</a>
+    <a class="ss-item" href="#">Health</a>
+    <a class="ss-item" href="#">Integrations</a>
+    <a class="ss-item" href="#">Connected accounts</a>
+    <a class="ss-item" href="#">API clients</a>
+    <a class="ss-item" href="#">Custom fields</a>
+    <a class="ss-item" href="#">Self-service reporting</a>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <div class="page-header">
+      <h1 class="page-title">People</h1>
+      <div class="page-header-actions">
+        <div class="icon-btn" title="RSS / Activity feed">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/>
+            <circle cx="5" cy="19" r="1"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <a class="tab active" href="#">Users</a>
+      <a class="tab" href="#">Groups</a>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <button class="btn-new">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        New
+      </button>
+      <button class="btn-import">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 14v5a2 2 0 002 2h12a2 2 0 002-2v-5"/>
+          <polyline points="8 10 12 14 16 10"/><line x1="12" y1="14" x2="12" y2="3"/>
+        </svg>
+        Import
+      </button>
+      <div class="toolbar-spacer"></div>
+      <div class="filter-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+        </svg>
+        Filtering 11/19
+        <div class="filter-chip-x">✕</div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="th-check"><input type="checkbox" /></th>
+            <th class="sortable">
+              Name
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M18 15l-6-6-6 6"/>
+              </svg>
+            </th>
+            <th>E-mail address</th>
+            <th>Role</th>
+            <th>Last login</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-check"><input type="checkbox" /></td>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" style="background:#3d9e82;">AA</div>
+                <span class="user-name">Aadil Ali</span>
+              </div>
+            </td>
+            <td><a class="email-link" href="#">aadil.ali@hyperproof.io</a></td>
+            <td>Admin</td>
+            <td>04/06/2026</td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+          </tr>
+          <tr>
+            <td class="td-check"><input type="checkbox" /></td>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" style="background:#3d9e82;">AA</div>
+                <span class="user-name">Alam Ali</span>
+              </div>
+            </td>
+            <td><a class="email-link" href="#">alam@hyperproof.io</a></td>
+            <td>Admin</td>
+            <td>04/06/2026</td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+          </tr>
+          <tr>
+            <td class="td-check"><input type="checkbox" /></td>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" style="background:#e07b3a;">AC</div>
+                <span class="user-name">Ashley Chiu</span>
+              </div>
+            </td>
+            <td><a class="email-link" href="#">ashley@hyperproof.io</a></td>
+            <td>Admin</td>
+            <td>04/06/2026</td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+          </tr>
+          <tr>
+            <td class="td-check"><input type="checkbox" /></td>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" style="background:#6b5ce7;">CG</div>
+                <span class="user-name">Cassidy Goeden</span>
+              </div>
+            </td>
+            <td><a class="email-link" href="#">cassidy@hyperproof.io</a></td>
+            <td>Admin</td>
+            <td>04/06/2026</td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+          </tr>
+          <tr>
+            <td class="td-check"><input type="checkbox" /></td>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" style="background:#d97706;">DS</div>
+                <span class="user-name">Derik Stenerson</span>
+              </div>
+            </td>
+            <td><a class="email-link" href="#">derik@hyperproof.io</a></td>
+            <td>Admin</td>
+            <td>04/07/2026</td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+          </tr>
+          <tr>
+            <td class="td-check"><input type="checkbox" /></td>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" style="background:#e05b8a;">JN</div>
+                <span class="user-name">Jesse Noble</span>
+              </div>
+            </td>
+            <td><a class="email-link" href="#">jesse@hyperproof.io</a></td>
+            <td>Admin</td>
+            <td>04/06/2026</td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+          </tr>
+          <tr>
+            <td class="td-check"><input type="checkbox" /></td>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" style="background:#2563eb;">KS</div>
+                <span class="user-name">Kait Sousa</span>
+              </div>
+            </td>
+            <td><a class="email-link" href="#">kait.sousa@hyperproof.io</a></td>
+            <td>Admin</td>
+            <td>04/08/2026</td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+          </tr>
+          <tr>
+            <td class="td-check"><input type="checkbox" /></td>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" style="background:#059669;">LM</div>
+                <span class="user-name">Lena Morris</span>
+              </div>
+            </td>
+            <td><a class="email-link" href="#">lena.morris@hyperproof.io</a></td>
+            <td>Member</td>
+            <td>04/05/2026</td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+          </tr>
+          <tr>
+            <td class="td-check"><input type="checkbox" /></td>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" style="background:#7c3aed;">MT</div>
+                <span class="user-name">Marcus Torres</span>
+              </div>
+            </td>
+            <td><a class="email-link" href="#">marcus.torres@hyperproof.io</a></td>
+            <td>Member</td>
+            <td>04/04/2026</td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+          </tr>
+          <tr>
+            <td class="td-check"><input type="checkbox" /></td>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" style="background:#dc2626;">NP</div>
+                <span class="user-name">Nadia Park</span>
+              </div>
+            </td>
+            <td><a class="email-link" href="#">nadia.park@hyperproof.io</a></td>
+            <td>Viewer</td>
+            <td>04/01/2026</td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+          </tr>
+          <tr>
+            <td class="td-check"><input type="checkbox" /></td>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" style="background:#0891b2;">RW</div>
+                <span class="user-name">Ryan Walsh</span>
+              </div>
+            </td>
+            <td><a class="email-link" href="#">ryan.walsh@hyperproof.io</a></td>
+            <td>Member</td>
+            <td>03/28/2026</td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>
