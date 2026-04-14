@@ -390,8 +390,317 @@
       color: #5b3fc8;
       text-decoration: none;
       font-size: 13.5px;
+      margin-right: 10px;
     }
     .deactivate-link:hover { text-decoration: underline; }
+
+    /* Access Button */
+    .btn-access {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border: 1.5px solid #5b3fc8;
+      border-radius: 5px;
+      background: white;
+      color: #5b3fc8;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.12s;
+      margin-right: 8px;
+    }
+    .btn-access:hover { background: #f0ecff; }
+    .btn-access svg { width: 13px; height: 13px; }
+
+    /* Access Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+
+    .modal-container {
+      background: #fff;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 900px;
+      height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px;
+      border-bottom: 1px solid #e5e7eb;
+      flex-shrink: 0;
+    }
+
+    .modal-user-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .modal-user-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .modal-user-details h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 0;
+    }
+
+    .modal-user-details p {
+      font-size: 13px;
+      color: #6b7280;
+      margin: 2px 0 0 0;
+    }
+
+    .modal-org-role {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .role-admin { background: #fef3c7; color: #92400e; }
+    .role-member { background: #dbeafe; color: #1e40af; }
+    .role-viewer { background: #f3f4f6; color: #374151; }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: #f5f5f5;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #6b7280;
+      flex-shrink: 0;
+    }
+
+    .modal-close:hover { background: #e5e7eb; }
+
+    .modal-stats {
+      padding: 12px 24px;
+      background: #f8f9fb;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .stat-item { color: #555; }
+    .stat-item strong { color: #1a1a2e; font-weight: 600; }
+
+    .modal-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    /* Tree Styles */
+    .access-tree {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tree-section {
+      margin-bottom: 24px;
+    }
+
+    .tree-section-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #9ca3af;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f0f2f5;
+    }
+
+    .tree-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tree-item {
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .tree-children {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      margin-left: 16px;
+      padding-left: 18px;
+      border-left: 2px solid #e5e7eb;
+      margin-top: 6px;
+    }
+
+    .tree-children.hidden { display: none; }
+
+    .tree-children > .tree-item::before {
+      content: '';
+      position: absolute;
+      left: -18px;
+      top: 18px;
+      width: 18px;
+      height: 2px;
+      background: #e5e7eb;
+    }
+
+    .tree-node {
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      background: white;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      gap: 0;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .tree-node:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border-color: #d1d5db;
+    }
+
+    .tree-node.source-inherited {
+      border-style: dashed;
+      background: #fafafa;
+    }
+
+    .node-accent {
+      width: 4px;
+      align-self: stretch;
+      border-radius: 4px 0 0 4px;
+      flex-shrink: 0;
+    }
+
+    .node-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      color: #6b7280;
+      flex-shrink: 0;
+      font-size: 14px;
+    }
+
+    .node-content {
+      flex: 1;
+      padding: 0 8px;
+      min-width: 0;
+    }
+
+    .node-name {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #1a1a2e;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .node-type {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-top: 2px;
+    }
+
+    .node-badges {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    .nbadge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 16px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      border: 1px solid;
+    }
+
+    .nbadge-manager { color: #7c3aed; background: #f5f3ff; border-color: #e9d5ff; }
+    .nbadge-contributor { color: #2563eb; background: #eff6ff; border-color: #bfdbfe; }
+    .nbadge-viewer { color: #6b7280; background: #f9fafb; border-color: #e5e7eb; }
+
+    .nbadge-direct { color: #059669; background: #ecfdf5; border-color: #a7f3d0; }
+    .nbadge-inherited { color: #9ca3af; background: #f9fafb; border-color: #d1d5db; border-style: dashed; }
+
+    .nbadge-owner { color: #d97706; background: #fffbeb; border-color: #fde68a; }
+    .nbadge-assignee { color: #0891b2; background: #ecfeff; border-color: #a5f3fc; }
+
+    .node-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-left: 1px solid #e5e7eb;
+      background: none;
+      cursor: pointer;
+      color: #9ca3af;
+      padding: 0;
+      flex-shrink: 0;
+      transition: all 0.12s;
+    }
+
+    .node-toggle:hover { background: #f5f5f5; color: #555; }
+    .node-toggle svg { width: 14px; height: 14px; transition: transform 0.2s; }
+    .node-toggle.expanded svg { transform: rotate(180deg); }
+
+    .no-access { color: #9ca3af; font-size: 13.5px; padding: 20px; text-align: center; }
   </style>
 </head>
 <body>
@@ -602,7 +911,7 @@
             <td>Admin</td>
             <td>04/06/2026</td>
             <td><span class="badge badge-active">Active</span></td>
-            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+            <td><button class="btn-access" onclick="openAccessModal(0)" title="View access map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Access</button><a class="deactivate-link" href="#">Deactivate</a></td>
           </tr>
           <tr>
             <td class="td-check"><input type="checkbox" /></td>
@@ -616,7 +925,7 @@
             <td>Admin</td>
             <td>04/06/2026</td>
             <td><span class="badge badge-active">Active</span></td>
-            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+            <td><button class="btn-access" onclick="openAccessModal(1)" title="View access map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Access</button><a class="deactivate-link" href="#">Deactivate</a></td>
           </tr>
           <tr>
             <td class="td-check"><input type="checkbox" /></td>
@@ -630,7 +939,7 @@
             <td>Admin</td>
             <td>04/06/2026</td>
             <td><span class="badge badge-active">Active</span></td>
-            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+            <td><button class="btn-access" onclick="openAccessModal(2)" title="View access map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Access</button><a class="deactivate-link" href="#">Deactivate</a></td>
           </tr>
           <tr>
             <td class="td-check"><input type="checkbox" /></td>
@@ -644,7 +953,7 @@
             <td>Admin</td>
             <td>04/06/2026</td>
             <td><span class="badge badge-active">Active</span></td>
-            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+            <td><button class="btn-access" onclick="openAccessModal(3)" title="View access map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Access</button><a class="deactivate-link" href="#">Deactivate</a></td>
           </tr>
           <tr>
             <td class="td-check"><input type="checkbox" /></td>
@@ -658,7 +967,7 @@
             <td>Admin</td>
             <td>04/07/2026</td>
             <td><span class="badge badge-active">Active</span></td>
-            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+            <td><button class="btn-access" onclick="openAccessModal(4)" title="View access map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Access</button><a class="deactivate-link" href="#">Deactivate</a></td>
           </tr>
           <tr>
             <td class="td-check"><input type="checkbox" /></td>
@@ -672,7 +981,7 @@
             <td>Admin</td>
             <td>04/06/2026</td>
             <td><span class="badge badge-active">Active</span></td>
-            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+            <td><button class="btn-access" onclick="openAccessModal(5)" title="View access map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Access</button><a class="deactivate-link" href="#">Deactivate</a></td>
           </tr>
           <tr>
             <td class="td-check"><input type="checkbox" /></td>
@@ -686,7 +995,7 @@
             <td>Admin</td>
             <td>04/08/2026</td>
             <td><span class="badge badge-active">Active</span></td>
-            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+            <td><button class="btn-access" onclick="openAccessModal(6)" title="View access map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Access</button><a class="deactivate-link" href="#">Deactivate</a></td>
           </tr>
           <tr>
             <td class="td-check"><input type="checkbox" /></td>
@@ -700,7 +1009,7 @@
             <td>Member</td>
             <td>04/05/2026</td>
             <td><span class="badge badge-active">Active</span></td>
-            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+            <td><button class="btn-access" onclick="openAccessModal(7)" title="View access map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Access</button><a class="deactivate-link" href="#">Deactivate</a></td>
           </tr>
           <tr>
             <td class="td-check"><input type="checkbox" /></td>
@@ -714,7 +1023,7 @@
             <td>Member</td>
             <td>04/04/2026</td>
             <td><span class="badge badge-active">Active</span></td>
-            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+            <td><button class="btn-access" onclick="openAccessModal(8)" title="View access map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Access</button><a class="deactivate-link" href="#">Deactivate</a></td>
           </tr>
           <tr>
             <td class="td-check"><input type="checkbox" /></td>
@@ -728,7 +1037,7 @@
             <td>Viewer</td>
             <td>04/01/2026</td>
             <td><span class="badge badge-active">Active</span></td>
-            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+            <td><button class="btn-access" onclick="openAccessModal(9)" title="View access map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Access</button><a class="deactivate-link" href="#">Deactivate</a></td>
           </tr>
           <tr>
             <td class="td-check"><input type="checkbox" /></td>
@@ -742,7 +1051,7 @@
             <td>Member</td>
             <td>03/28/2026</td>
             <td><span class="badge badge-active">Active</span></td>
-            <td><a class="deactivate-link" href="#">Deactivate</a></td>
+            <td><button class="btn-access" onclick="openAccessModal(10)" title="View access map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Access</button><a class="deactivate-link" href="#">Deactivate</a></td>
           </tr>
         </tbody>
       </table>
@@ -750,6 +1059,760 @@
 
   </main>
 </div>
+
+<!-- ACCESS MODAL -->
+<div class="modal-overlay" id="accessModal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <div class="modal-user-info">
+        <div class="modal-user-avatar" id="modalAvatar">AA</div>
+        <div class="modal-user-details">
+          <h2 id="modalName">Aadil Ali</h2>
+          <p id="modalEmail">aadil.ali@hyperproof.io</p>
+          <div class="modal-org-role role-admin" id="modalRole">Admin</div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeAccessModal()">✕</button>
+    </div>
+
+    <div class="modal-stats" id="modalStats">
+      <div class="stat-item"><strong id="statManager">0</strong> Manager</div>
+      <div class="stat-item"><strong id="statContributor">0</strong> Contributor</div>
+      <div class="stat-item"><strong id="statViewer">0</strong> Viewer</div>
+      <div class="stat-item">|</div>
+      <div class="stat-item"><strong id="statDirect">0</strong> Direct</div>
+      <div class="stat-item"><strong id="statInherited">0</strong> Inherited</div>
+    </div>
+
+    <div class="modal-body">
+      <ul class="access-tree" id="accessTree"></ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  // User access data with rich tree structures
+  const USERS_ACCESS = [
+    {
+      id: 0,
+      name: 'Aadil Ali',
+      email: 'aadil.ali@hyperproof.io',
+      initials: 'AA',
+      color: '#3d9e82',
+      orgRole: 'Admin',
+      tree: [
+        {
+          id: 'aa-prog-1',
+          type: 'program',
+          name: 'SOC 2 Type II',
+          permission: 'manager',
+          source: 'direct',
+          roles: ['owner'],
+          children: [
+            {
+              id: 'aa-ctrl-1',
+              type: 'control',
+              name: 'CC6.1 Logical Access Controls',
+              permission: 'manager',
+              source: 'inherited',
+              roles: ['owner'],
+              children: [
+                { id: 'aa-proof-1', type: 'proof', name: 'CC6.1 Evidence Q1.pdf', permission: 'manager', source: 'inherited', roles: [], children: [] },
+                { id: 'aa-proof-2', type: 'proof', name: 'Access Review Matrix.xlsx', permission: 'manager', source: 'inherited', roles: [], children: [] }
+              ]
+            },
+            {
+              id: 'aa-ctrl-2',
+              type: 'control',
+              name: 'CC7.2 Incident Response',
+              permission: 'manager',
+              source: 'inherited',
+              roles: ['assignee'],
+              children: [
+                { id: 'aa-proof-3', type: 'proof', name: 'IR Runbook 2024.docx', permission: 'manager', source: 'inherited', roles: [], children: [] }
+              ]
+            }
+          ]
+        },
+        {
+          id: 'aa-prog-2',
+          type: 'program',
+          name: 'ISO 27001',
+          permission: 'viewer',
+          source: 'direct',
+          roles: [],
+          children: []
+        }
+      ]
+    },
+    {
+      id: 1,
+      name: 'Alam Ali',
+      email: 'alam@hyperproof.io',
+      initials: 'AA',
+      color: '#3d9e82',
+      orgRole: 'Admin',
+      tree: [
+        {
+          id: 'al-prog-1',
+          type: 'program',
+          name: 'NIST CSF',
+          permission: 'manager',
+          source: 'direct',
+          roles: ['owner'],
+          children: [
+            {
+              id: 'al-ctrl-1',
+              type: 'control',
+              name: 'ID.AM Asset Management',
+              permission: 'manager',
+              source: 'inherited',
+              roles: [],
+              children: []
+            },
+            {
+              id: 'al-ctrl-2',
+              type: 'control',
+              name: 'PR.AC Access Control',
+              permission: 'manager',
+              source: 'inherited',
+              roles: ['assignee'],
+              children: [
+                { id: 'al-proof-1', type: 'proof', name: 'AC Policy v3.pdf', permission: 'manager', source: 'inherited', roles: [], children: [] }
+              ]
+            }
+          ]
+        },
+        {
+          id: 'al-prog-2',
+          type: 'program',
+          name: 'SOC 2 Type II',
+          permission: 'contributor',
+          source: 'direct',
+          roles: [],
+          children: [
+            {
+              id: 'al-ctrl-3',
+              type: 'control',
+              name: 'CC9.1 Risk Mitigation',
+              permission: 'contributor',
+              source: 'inherited',
+              roles: ['assignee'],
+              children: []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 2,
+      name: 'Ashley Chiu',
+      email: 'ashley@hyperproof.io',
+      initials: 'AC',
+      color: '#e07b3a',
+      orgRole: 'Admin',
+      tree: [
+        {
+          id: 'ac-prog-1',
+          type: 'program',
+          name: 'SOC 2 Type II',
+          permission: 'manager',
+          source: 'direct',
+          roles: [],
+          children: [
+            {
+              id: 'ac-ctrl-1',
+              type: 'control',
+              name: 'CC8.1 Change Management',
+              permission: 'manager',
+              source: 'inherited',
+              roles: ['owner', 'assignee'],
+              children: [
+                { id: 'ac-proof-1', type: 'proof', name: 'Change Log Q1.pdf', permission: 'manager', source: 'inherited', roles: [], children: [] },
+                { id: 'ac-proof-2', type: 'proof', name: 'CAB Meeting Notes.docx', permission: 'manager', source: 'inherited', roles: [], children: [] }
+              ]
+            },
+            {
+              id: 'ac-ctrl-2',
+              type: 'control',
+              name: 'CC6.2 Remote Access',
+              permission: 'manager',
+              source: 'inherited',
+              roles: [],
+              children: []
+            }
+          ]
+        },
+        {
+          id: 'ac-prog-2',
+          type: 'program',
+          name: 'PCI DSS',
+          permission: 'contributor',
+          source: 'direct',
+          roles: [],
+          children: [
+            {
+              id: 'ac-ctrl-3',
+              type: 'control',
+              name: 'Req 8 Identity Management',
+              permission: 'contributor',
+              source: 'inherited',
+              roles: [],
+              children: []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 3,
+      name: 'Cassidy Goeden',
+      email: 'cassidy@hyperproof.io',
+      initials: 'CG',
+      color: '#6b5ce7',
+      orgRole: 'Admin',
+      tree: [
+        {
+          id: 'cg-prog-1',
+          type: 'program',
+          name: 'ISO 27001',
+          permission: 'manager',
+          source: 'direct',
+          roles: ['owner'],
+          children: [
+            {
+              id: 'cg-ctrl-1',
+              type: 'control',
+              name: 'A.9 Access Control',
+              permission: 'manager',
+              source: 'inherited',
+              roles: ['owner'],
+              children: [
+                { id: 'cg-proof-1', type: 'proof', name: 'Access Review 2025.pdf', permission: 'manager', source: 'inherited', roles: [], children: [] }
+              ]
+            },
+            {
+              id: 'cg-ctrl-2',
+              type: 'control',
+              name: 'A.12 Operations Security',
+              permission: 'manager',
+              source: 'inherited',
+              roles: ['assignee'],
+              children: []
+            }
+          ]
+        },
+        {
+          id: 'cg-prog-2',
+          type: 'program',
+          name: 'HIPAA',
+          permission: 'viewer',
+          source: 'direct',
+          roles: [],
+          children: [
+            {
+              id: 'cg-ctrl-3',
+              type: 'control',
+              name: '§164.312 Technical Safeguards',
+              permission: 'viewer',
+              source: 'inherited',
+              roles: [],
+              children: [
+                { id: 'cg-proof-2', type: 'proof', name: 'Technical Safeguards.pdf', permission: 'viewer', source: 'inherited', roles: [], children: [] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 4,
+      name: 'Derik Stenerson',
+      email: 'derik@hyperproof.io',
+      initials: 'DS',
+      color: '#d97706',
+      orgRole: 'Admin',
+      tree: [
+        {
+          id: 'ds-prog-1',
+          type: 'program',
+          name: 'SOC 2 Type II',
+          permission: 'manager',
+          source: 'direct',
+          roles: ['owner'],
+          children: [
+            {
+              id: 'ds-ctrl-1',
+              type: 'control',
+              name: 'CC2.1 Communication',
+              permission: 'manager',
+              source: 'inherited',
+              roles: [],
+              children: []
+            },
+            {
+              id: 'ds-ctrl-2',
+              type: 'control',
+              name: 'CC3.1 Risk Assessment',
+              permission: 'manager',
+              source: 'inherited',
+              roles: ['assignee'],
+              children: [
+                { id: 'ds-proof-1', type: 'proof', name: 'Risk Register 2025.xlsx', permission: 'manager', source: 'inherited', roles: [], children: [] }
+              ]
+            }
+          ]
+        },
+        {
+          id: 'ds-prog-2',
+          type: 'program',
+          name: 'FedRAMP',
+          permission: 'manager',
+          source: 'direct',
+          roles: ['owner'],
+          children: [
+            {
+              id: 'ds-ctrl-3',
+              type: 'control',
+              name: 'AC-2 Account Management',
+              permission: 'manager',
+              source: 'inherited',
+              roles: ['assignee'],
+              children: []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 5,
+      name: 'Jesse Noble',
+      email: 'jesse@hyperproof.io',
+      initials: 'JN',
+      color: '#e05b8a',
+      orgRole: 'Admin',
+      tree: [
+        {
+          id: 'jn-prog-1',
+          type: 'program',
+          name: 'HIPAA',
+          permission: 'manager',
+          source: 'direct',
+          roles: ['owner'],
+          children: [
+            {
+              id: 'jn-ctrl-1',
+              type: 'control',
+              name: '§164.308 Admin Safeguards',
+              permission: 'manager',
+              source: 'inherited',
+              roles: ['owner'],
+              children: [
+                { id: 'jn-proof-1', type: 'proof', name: 'HIPAA Policy Manual.pdf', permission: 'manager', source: 'inherited', roles: [], children: [] }
+              ]
+            },
+            {
+              id: 'jn-ctrl-2',
+              type: 'control',
+              name: '§164.310 Physical Safeguards',
+              permission: 'manager',
+              source: 'inherited',
+              roles: [],
+              children: []
+            }
+          ]
+        },
+        {
+          id: 'jn-prog-2',
+          type: 'program',
+          name: 'SOC 2 Type II',
+          permission: 'contributor',
+          source: 'direct',
+          roles: [],
+          children: [
+            {
+              id: 'jn-ctrl-3',
+              type: 'control',
+              name: 'CC5.1 COSO Principles',
+              permission: 'contributor',
+              source: 'inherited',
+              roles: ['assignee'],
+              children: []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 6,
+      name: 'Kait Sousa',
+      email: 'kait.sousa@hyperproof.io',
+      initials: 'KS',
+      color: '#2563eb',
+      orgRole: 'Admin',
+      tree: [
+        {
+          id: 'ks-prog-1',
+          type: 'program',
+          name: 'SOC 2 Type II',
+          permission: 'manager',
+          source: 'direct',
+          roles: ['owner'],
+          children: [
+            {
+              id: 'ks-ctrl-1',
+              type: 'control',
+              name: 'CC6.1 Logical Access',
+              permission: 'manager',
+              source: 'inherited',
+              roles: ['owner'],
+              children: [
+                { id: 'ks-proof-1', type: 'proof', name: 'Q1 Access Review.pdf', permission: 'manager', source: 'inherited', roles: [], children: [] },
+                { id: 'ks-proof-2', type: 'proof', name: 'User Provisioning Log.xlsx', permission: 'manager', source: 'inherited', roles: [], children: [] }
+              ]
+            },
+            {
+              id: 'ks-ctrl-2',
+              type: 'control',
+              name: 'CC7.2 Incident Response',
+              permission: 'manager',
+              source: 'inherited',
+              roles: ['assignee'],
+              children: [
+                { id: 'ks-proof-3', type: 'proof', name: 'IR Playbook v2.docx', permission: 'manager', source: 'inherited', roles: [], children: [] }
+              ]
+            },
+            {
+              id: 'ks-ctrl-3',
+              type: 'control',
+              name: 'CC5.2 COSO Objectives',
+              permission: 'manager',
+              source: 'inherited',
+              roles: [],
+              children: []
+            }
+          ]
+        },
+        {
+          id: 'ks-prog-2',
+          type: 'program',
+          name: 'ISO 27001',
+          permission: 'contributor',
+          source: 'direct',
+          roles: [],
+          children: [
+            {
+              id: 'ks-ctrl-4',
+              type: 'control',
+              name: 'A.6 Organization Security',
+              permission: 'contributor',
+              source: 'inherited',
+              roles: ['assignee'],
+              children: []
+            }
+          ]
+        },
+        {
+          id: 'ks-ctrl-5',
+          type: 'control',
+          name: 'Data Retention Policy',
+          permission: 'viewer',
+          source: 'direct',
+          roles: [],
+          children: [
+            { id: 'ks-proof-4', type: 'proof', name: 'Retention Schedule.pdf', permission: 'viewer', source: 'inherited', roles: [], children: [] }
+          ]
+        }
+      ]
+    },
+    {
+      id: 7,
+      name: 'Lena Morris',
+      email: 'lena.morris@hyperproof.io',
+      initials: 'LM',
+      color: '#059669',
+      orgRole: 'Member',
+      tree: [
+        {
+          id: 'lm-prog-1',
+          type: 'program',
+          name: 'SOC 2 Type II',
+          permission: 'viewer',
+          source: 'direct',
+          roles: [],
+          children: [
+            {
+              id: 'lm-ctrl-1',
+              type: 'control',
+              name: 'CC6.1 Logical Access',
+              permission: 'viewer',
+              source: 'inherited',
+              roles: ['assignee'],
+              children: [
+                { id: 'lm-proof-1', type: 'proof', name: 'Access Logs January.pdf', permission: 'viewer', source: 'inherited', roles: [], children: [] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 8,
+      name: 'Marcus Torres',
+      email: 'marcus.torres@hyperproof.io',
+      initials: 'MT',
+      color: '#7c3aed',
+      orgRole: 'Member',
+      tree: [
+        {
+          id: 'mt-ctrl-1',
+          type: 'control',
+          name: 'CC8.1 Change Management',
+          permission: 'contributor',
+          source: 'direct',
+          roles: ['assignee'],
+          children: [
+            { id: 'mt-proof-1', type: 'proof', name: 'Change Policy v2.pdf', permission: 'contributor', source: 'inherited', roles: [], children: [] }
+          ]
+        },
+        {
+          id: 'mt-ctrl-2',
+          type: 'control',
+          name: 'CC6.3 Network Security',
+          permission: 'viewer',
+          source: 'direct',
+          roles: [],
+          children: []
+        }
+      ]
+    },
+    {
+      id: 9,
+      name: 'Nadia Park',
+      email: 'nadia.park@hyperproof.io',
+      initials: 'NP',
+      color: '#dc2626',
+      orgRole: 'Viewer',
+      tree: [
+        {
+          id: 'np-ctrl-1',
+          type: 'control',
+          name: 'CC7.1 System Monitoring',
+          permission: 'viewer',
+          source: 'direct',
+          roles: [],
+          children: [
+            { id: 'np-proof-1', type: 'proof', name: 'Monitor Report Q1.pdf', permission: 'viewer', source: 'inherited', roles: [], children: [] }
+          ]
+        },
+        {
+          id: 'np-ctrl-2',
+          type: 'control',
+          name: 'CC9.1 Risk Mitigation',
+          permission: 'viewer',
+          source: 'direct',
+          roles: [],
+          children: []
+        }
+      ]
+    },
+    {
+      id: 10,
+      name: 'Ryan Walsh',
+      email: 'ryan.walsh@hyperproof.io',
+      initials: 'RW',
+      color: '#0891b2',
+      orgRole: 'Member',
+      tree: [
+        {
+          id: 'rw-prog-1',
+          type: 'program',
+          name: 'PCI DSS',
+          permission: 'contributor',
+          source: 'direct',
+          roles: [],
+          children: [
+            {
+              id: 'rw-ctrl-1',
+              type: 'control',
+              name: 'Req 6 Software Security',
+              permission: 'contributor',
+              source: 'inherited',
+              roles: ['assignee'],
+              children: [
+                { id: 'rw-proof-1', type: 'proof', name: 'SAST Results Q1.pdf', permission: 'contributor', source: 'inherited', roles: [], children: [] }
+              ]
+            },
+            {
+              id: 'rw-ctrl-2',
+              type: 'control',
+              name: 'Req 11 Security Testing',
+              permission: 'contributor',
+              source: 'inherited',
+              roles: [],
+              children: []
+            }
+          ]
+        },
+        {
+          id: 'rw-ctrl-3',
+          type: 'control',
+          name: 'CC4.1 Monitoring',
+          permission: 'manager',
+          source: 'direct',
+          roles: ['owner', 'assignee'],
+          children: [
+            { id: 'rw-proof-2', type: 'proof', name: 'Monitoring Framework.docx', permission: 'manager', source: 'inherited', roles: [], children: [] }
+          ]
+        }
+      ]
+    }
+  ];
+
+  const TYPE_CONFIG = {
+    program: { icon: '◈', color: '#4f46e5', label: 'Program' },
+    control: { icon: '⬡', color: '#0d9488', label: 'Control' },
+    proof: { icon: '◻', color: '#ea580c', label: 'Proof' }
+  };
+
+  const PERM_CONFIG = {
+    manager: 'manager',
+    contributor: 'contributor',
+    viewer: 'viewer'
+  };
+
+  function openAccessModal(userId) {
+    const user = USERS_ACCESS[userId];
+    if (!user) return;
+
+    // Update header
+    document.getElementById('modalAvatar').style.background = user.color;
+    document.getElementById('modalAvatar').textContent = user.initials;
+    document.getElementById('modalName').textContent = user.name;
+    document.getElementById('modalEmail').textContent = user.email;
+    const roleEl = document.getElementById('modalRole');
+    roleEl.className = `modal-org-role role-${user.orgRole.toLowerCase().replace(' ', '-')}`;
+    roleEl.textContent = user.orgRole;
+
+    // Calculate stats
+    let stats = { manager: 0, contributor: 0, viewer: 0, direct: 0, inherited: 0 };
+    countStats(user.tree, stats);
+    document.getElementById('statManager').textContent = stats.manager;
+    document.getElementById('statContributor').textContent = stats.contributor;
+    document.getElementById('statViewer').textContent = stats.viewer;
+    document.getElementById('statDirect').textContent = stats.direct;
+    document.getElementById('statInherited').textContent = stats.inherited;
+
+    // Render tree
+    const treeContainer = document.getElementById('accessTree');
+    treeContainer.innerHTML = '';
+    renderAccessTree(user.tree, treeContainer, null, user);
+
+    // Show modal
+    document.getElementById('accessModal').classList.add('active');
+  }
+
+  function closeAccessModal() {
+    document.getElementById('accessModal').classList.remove('active');
+  }
+
+  function countStats(nodes, stats) {
+    nodes.forEach(node => {
+      stats[node.permission]++;
+      if (node.source === 'direct') stats.direct++;
+      else stats.inherited++;
+      if (node.children) countStats(node.children, stats);
+    });
+  }
+
+  function renderAccessTree(nodes, container, parentNode, user) {
+    let hasPrograms = nodes.some(n => n.type === 'program');
+    let hasDirectControls = nodes.some(n => n.type === 'control');
+
+    if (hasPrograms) {
+      const progSection = document.createElement('div');
+      progSection.className = 'tree-section';
+      progSection.innerHTML = '<div class="tree-section-title">Programs</div>';
+      const progList = document.createElement('ul');
+      progList.className = 'tree-list';
+      nodes.filter(n => n.type === 'program').forEach(node => {
+        progList.appendChild(renderNode(node));
+      });
+      progSection.appendChild(progList);
+      container.appendChild(progSection);
+    }
+
+    if (hasDirectControls) {
+      const ctrlSection = document.createElement('div');
+      ctrlSection.className = 'tree-section';
+      ctrlSection.innerHTML = '<div class="tree-section-title">Direct Control Access</div>';
+      const ctrlList = document.createElement('ul');
+      ctrlList.className = 'tree-list';
+      nodes.filter(n => n.type === 'control').forEach(node => {
+        ctrlList.appendChild(renderNode(node));
+      });
+      ctrlSection.appendChild(ctrlList);
+      container.appendChild(ctrlSection);
+    }
+  }
+
+  function renderNode(node) {
+    const li = document.createElement('li');
+    li.className = 'tree-item';
+
+    const nodeEl = document.createElement('div');
+    nodeEl.className = `tree-node source-${node.source}`;
+
+    const tc = TYPE_CONFIG[node.type];
+
+    nodeEl.innerHTML = `
+      <div class="node-accent" style="background:${tc.color}"></div>
+      <div class="node-icon">${tc.icon}</div>
+      <div class="node-content">
+        <div class="node-name">${node.name}</div>
+        <div class="node-type" style="color:${tc.color}">${tc.label}</div>
+      </div>
+      <div class="node-badges">
+        <span class="nbadge nbadge-${node.permission}">${node.permission.charAt(0).toUpperCase() + node.permission.slice(1)}</span>
+        <span class="nbadge nbadge-${node.source}">${node.source === 'direct' ? '● Direct' : '○ Inherited'}</span>
+        ${node.roles.includes('owner') ? '<span class="nbadge nbadge-owner">★ Owner</span>' : ''}
+        ${node.roles.includes('assignee') ? '<span class="nbadge nbadge-assignee">◎ Assignee</span>' : ''}
+      </div>
+      ${node.children && node.children.length > 0 ? `<button class="node-toggle expanded" onclick="toggleChildren(event)" data-node="${node.id}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>` : ''}
+    `;
+
+    li.appendChild(nodeEl);
+
+    if (node.children && node.children.length > 0) {
+      const childrenUl = document.createElement('ul');
+      childrenUl.className = 'tree-children';
+      childrenUl.setAttribute('data-node', node.id);
+      node.children.forEach(child => {
+        childrenUl.appendChild(renderNode(child));
+      });
+      li.appendChild(childrenUl);
+    }
+
+    return li;
+  }
+
+  function toggleChildren(e) {
+    e.stopPropagation();
+    const btn = e.currentTarget;
+    const nodeId = btn.getAttribute('data-node');
+    const childrenUl = document.querySelector(`[data-node="${nodeId}"].tree-children`);
+
+    if (childrenUl) {
+      childrenUl.classList.toggle('hidden');
+      btn.classList.toggle('expanded');
+    }
+  }
+
+  // Close modal on background click
+  document.getElementById('accessModal').addEventListener('click', function(e) {
+    if (e.target === this) closeAccessModal();
+  });
+</script>
 
 </body>
 </html>
